@@ -15,7 +15,6 @@ import fr.humanbooster.ibrahim.aeroport.dao.Requetes;
 
 
 public class AeroportDaoImpl implements AeroportDao {
-
 	private Connection connection;
 
 	public AeroportDaoImpl() {
@@ -32,10 +31,11 @@ public class AeroportDaoImpl implements AeroportDao {
 	public Aeroport createAeroport(Aeroport aeroport) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(Requetes.REQUETE_AJOUT_AEROPORT, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, aeroport.getNom());
-		ps.executeQuery();
+		ps.executeUpdate();
 		ResultSet rs = ps.getGeneratedKeys();
-		rs.next();
-		aeroport.setId(rs.getLong(1));
+		if (rs.next()) {
+			aeroport.setId(rs.getLong(1));
+		}
 		return aeroport;
 	}
 
@@ -53,7 +53,7 @@ public class AeroportDaoImpl implements AeroportDao {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<Aeroport> getAllAeroports() throws SQLException {
 		List<Aeroport> aeroports = new ArrayList<>();
@@ -76,5 +76,12 @@ public class AeroportDaoImpl implements AeroportDao {
 		ps.setLong(2, aeroport.getId());
 		ps.executeUpdate();
 		return aeroport;
+	}
+
+	@Override
+	public Boolean deleteAeroport(Long id) throws SQLException {
+	    PreparedStatement ps = connection.prepareStatement(Requetes.REQUETE_SUPPRESSION_AEROPORT);
+	    ps.setLong(1, id);
+	    return ps.execute();
 	}
 }

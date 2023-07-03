@@ -18,6 +18,6 @@ public interface AeroportDao {
 	Aeroport updateAeroport(Aeroport aeroport) throws SQLException;
 
 	//D
-	//void deleteAeroport(Aeroport aeroport) throws SQLException;
+	Boolean deleteAeroport(Long id) throws SQLException;
 
 }
