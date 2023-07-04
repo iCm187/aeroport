@@ -18,7 +18,7 @@ public class Requetes {
 
     // Vol
     public static final String REQUETE_AJOUT_VOL = "INSERT INTO vol (dateHeureDepart, dateHeureArrive, PrixEnEuro, Id_Aeroport_Arrive, Id_Aeroport_Depart, Id_Compagnie) VALUES (?, ?, ?, ?, ?, ?)";
-    public static final String REQUETE_SELECTION_VOL_PAR_ID = "SELECT * FROM vol WHERE Id_Vol=?";    
+    public static final String REQUETE_SELECTION_TOUS_VOLS_TRIES_PAR_PRIX = "SELECT * FROM vol ORDER BY PrixEnEuro";   
     public static final String REQUETE_MISE_A_JOUR_VOL = "UPDATE vol SET dateHeureDepart=?, dateHeureArrive=?, PrixEnEuro=?, Id_Aeroport_Arrive=?, Id_Aeroport_Depart=?, Id_Compagnie=? WHERE Id_Vol=?";
   
 }
